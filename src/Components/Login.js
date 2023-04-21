@@ -51,7 +51,7 @@ export default function Login() {
       <Card sx={{ width: 400 }}>
       <CardContent sx={{textAlign:'Center'}}>
         <Typography variant="h3" sx={{my:3}}>
-        QuizApp
+        Quiz App😎
         </Typography>
         <Box
           sx={{
@@ -72,7 +72,7 @@ export default function Login() {
               size="large"
               sx={{ width: '100' }}
             >
-              Start
+              Start👉
             </Button>
           </form>
         </Box>
