@@ -6,7 +6,7 @@ export const stateContext= createContext();
 
 const getFreshContext=()=>{
   if(localStorage.getItem('context')===null)
-  
+
   localStorage.setItem('context',JSON.stringify({    
         participantId: 0,
         timeTaken: 0,
@@ -21,7 +21,11 @@ export default function useStateContext() {
     return {
         context,
         setContext: obj => { 
-            setContext({ ...context, ...obj }) }
+            setContext({ ...context, ...obj }) },
+            ressetContext : ()=> {
+              localStorage.removeItem('context')
+              setContext(getFreshContext)
+            }
      };
 }
 

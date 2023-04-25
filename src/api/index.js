@@ -5,6 +5,7 @@ export const BASE_URL = 'https://localhost:7135/';
 export const ENDPOINTS = {
     participant: 'participant',
     Question :'Question',
+   getAnswers : 'question/getanswers'
 }
 
 export const createAPIEndpoint = endpoint => {
