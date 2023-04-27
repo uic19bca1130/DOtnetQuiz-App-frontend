@@ -14,29 +14,29 @@ export default function Result() {
 
   useEffect(() => {
     const ids = context.selectedOptions.map(x => x.qnId)
+    
     createAPIEndpoint(ENDPOINTS.getAnswers)
-      .post(ids)
-      .then(res => {
-        const qna = context.selectedOptions
-          .map(x => ({
-            ...x,
-            ...(res.data.find(y => y.qnId == x.qnId))
-          }))
-        setQnAnswers(qna)
-        calculateScore(qna)
-        console.log(qna);
+    .post(ids)
+    .then(res => { 
+      //console.log(res.data); 
+      const qna = context.selectedOptions
+        .map(x => ({
+          ...x,
+          ...(res.data.find(y => y.qnId == x.qnId))
+        }))
+      setQnAnswers(qna)
+      calculateScore(qna)
+        
       })
       .catch(err => console.log(err))
   }, [])
 
   const calculateScore = qna => {
-    let tempScore = 0;
-    if (qna) {
-      tempScore = qna.reduce((acc, curr) => {
-        return curr.answer === curr.selected ? acc + 1 : acc;
-      }, 0);
-    }
-    setScore(tempScore);
+    debugger;
+    let tempScore = qna.reduce((acc, curr) => {
+      return curr.answer == curr.selected ? acc + 1 : acc;
+    }, 0)
+    setScore(tempScore)
   }
 
  const restart = () => {
@@ -46,18 +46,19 @@ export default function Result() {
   })
    navigate("/quiz")
  }
- const submitScore = () => {
-  createAPIEndpoint(ENDPOINTS.participant)
-    .put(context.participantId, {
-      participantId: context.participantId,
-      score: score,
-      timeTaken: context.timeTaken
-    })
-    .then(res=>{console.log(res);})
-    .catch(err=>{console.log(err);}) 
-  }
+//  const submitScore = () => {
+//   createAPIEndpoint(ENDPOINTS.participant)
+//     .put(context.participantId, {
+//       participantId: context.participantId,
+//       score: score,
+//       timeTaken: context.timeTaken
+//     })
+//     .then(res=>{console.log(res);})
+//     .catch(err=>{console.log(err);}) 
+//   }
   return (
     
+
     <Card sx={{ mt: 5, display: 'flex', width: '100%', maxWidth: 640, mx: 'auto' }}>
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           <CardContent sx={{ flex: '1 0 auto', textAlign: 'center' }}>
